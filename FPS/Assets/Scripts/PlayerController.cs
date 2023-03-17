@@ -26,13 +26,11 @@ public class PlayerController : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         moveAction = playerInput.actions["Move"];
         jumpAction = playerInput.actions["jump"];
-        
-        mouseInput = Mouse.current.position.ReadValue();
     }
 
     void Update()
     {
-        mouseLook.ReceiveInput(mouseInput);
+        //mouseLook.ReceiveInput(mouseInput);
         groundedPlayer = controller.isGrounded;
         if (groundedPlayer && playerVelocity.y < 0)
         {
