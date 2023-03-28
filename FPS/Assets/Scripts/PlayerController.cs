@@ -4,7 +4,6 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(CharacterController), typeof(PlayerInput))]
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] MouseLook mouseLook;
     private float playerSpeed = 2.0f;
 
     private float jumpHeight = 1.0f;
@@ -18,19 +17,22 @@ public class PlayerController : MonoBehaviour
 
     private InputAction moveAction;
     private InputAction jumpAction;
+    private InputAction mouseAction;
 
     Vector2 mouseInput;
     private void Awake()
     {
+        Cursor.visible = false;
         controller = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
         moveAction = playerInput.actions["Move"];
         jumpAction = playerInput.actions["jump"];
     }
 
+
     void Update()
     {
-        //mouseLook.ReceiveInput(mouseInput);
+        Cursor.lockState = CursorLockMode.Locked;
         groundedPlayer = controller.isGrounded;
         if (groundedPlayer && playerVelocity.y < 0)
         {
@@ -49,5 +51,6 @@ public class PlayerController : MonoBehaviour
 
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
+
     }
 }

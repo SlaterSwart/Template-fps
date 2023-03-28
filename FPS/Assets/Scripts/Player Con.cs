@@ -165,11 +165,39 @@ public partial class @PlayerCon : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""37618f97-3714-4d8e-9165-de906fe01cee"",
-                    ""path"": ""<Mouse>/rightButton"",
+                    ""path"": ""<Mouse>/press"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""water"",
+            ""id"": ""5efa8df1-dd98-4d33-9075-b2d79f0fdd9e"",
+            ""actions"": [
+                {
+                    ""name"": ""New action"",
+                    ""type"": ""Button"",
+                    ""id"": ""d191e60e-ac1b-4d75-af47-38499590cb4c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""83ca61c7-4c0d-4093-8c7b-56182b2a4b01"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""New action"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -185,6 +213,9 @@ public partial class @PlayerCon : IInputActionCollection2, IDisposable
         m_Land_Shoot = m_Land.FindAction("Shoot", throwIfNotFound: true);
         m_Land_Look = m_Land.FindAction("Look", throwIfNotFound: true);
         m_Land_Aim = m_Land.FindAction("Aim", throwIfNotFound: true);
+        // water
+        m_water = asset.FindActionMap("water", throwIfNotFound: true);
+        m_water_Newaction = m_water.FindAction("New action", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -305,6 +336,39 @@ public partial class @PlayerCon : IInputActionCollection2, IDisposable
         }
     }
     public LandActions @Land => new LandActions(this);
+
+    // water
+    private readonly InputActionMap m_water;
+    private IWaterActions m_WaterActionsCallbackInterface;
+    private readonly InputAction m_water_Newaction;
+    public struct WaterActions
+    {
+        private @PlayerCon m_Wrapper;
+        public WaterActions(@PlayerCon wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Newaction => m_Wrapper.m_water_Newaction;
+        public InputActionMap Get() { return m_Wrapper.m_water; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(WaterActions set) { return set.Get(); }
+        public void SetCallbacks(IWaterActions instance)
+        {
+            if (m_Wrapper.m_WaterActionsCallbackInterface != null)
+            {
+                @Newaction.started -= m_Wrapper.m_WaterActionsCallbackInterface.OnNewaction;
+                @Newaction.performed -= m_Wrapper.m_WaterActionsCallbackInterface.OnNewaction;
+                @Newaction.canceled -= m_Wrapper.m_WaterActionsCallbackInterface.OnNewaction;
+            }
+            m_Wrapper.m_WaterActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Newaction.started += instance.OnNewaction;
+                @Newaction.performed += instance.OnNewaction;
+                @Newaction.canceled += instance.OnNewaction;
+            }
+        }
+    }
+    public WaterActions @water => new WaterActions(this);
     public interface ILandActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -312,5 +376,9 @@ public partial class @PlayerCon : IInputActionCollection2, IDisposable
         void OnShoot(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
+    }
+    public interface IWaterActions
+    {
+        void OnNewaction(InputAction.CallbackContext context);
     }
 }

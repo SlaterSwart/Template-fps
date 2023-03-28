@@ -11,7 +11,8 @@
                     "id": "e914041d-7c35-49d2-9e13-203375c8f227",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Jump",
@@ -19,7 +20,8 @@
                     "id": "09ea577d-28c8-417b-8322-ef7eaf40dc7a",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Shoot",
@@ -27,7 +29,8 @@
                     "id": "7075e343-18a6-4dc6-9ff9-18727355a45b",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Look",
@@ -35,7 +38,8 @@
                     "id": "c9376082-629d-4eb6-8353-f9829493e75f",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Aim",
@@ -43,7 +47,8 @@
                     "id": "723edbc8-3fbf-400f-9db5-8bae01ab5b16",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -138,11 +143,39 @@
                 {
                     "name": "",
                     "id": "37618f97-3714-4d8e-9165-de906fe01cee",
-                    "path": "<Mouse>/rightButton",
+                    "path": "<Mouse>/press",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Aim",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "water",
+            "id": "5efa8df1-dd98-4d33-9075-b2d79f0fdd9e",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "d191e60e-ac1b-4d75-af47-38499590cb4c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "83ca61c7-4c0d-4093-8c7b-56182b2a4b01",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
