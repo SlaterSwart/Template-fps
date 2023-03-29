@@ -10,7 +10,8 @@ public class MouseLook : MonoBehaviour
     private Vector2 mouseLook;
     private float xRotation = 0f;
     private float yRotation = 0f;
-    private Transform playerBody;
+    public Transform playerBody;
+    public Transform Orientation;
 
     void Awake(){
         playerBody = transform.parent;

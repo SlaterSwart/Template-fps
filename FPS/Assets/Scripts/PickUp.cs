@@ -9,7 +9,7 @@ public class PickUp : MonoBehaviour
 
     private bool FPress;
     private bool Gpress;
-    public Gun gunScript; //reference to gun script
+    public GameObject gunScript; //reference to gun script
     public Rigidbody rb; //reference to ridge body
     public BoxCollider BC; 
     public Transform player, Holder /*gun holder*/, fpsCam;
@@ -23,12 +23,12 @@ public class PickUp : MonoBehaviour
     private void Start(){
         controls = new PlayerCon();
         if(!equipped){
-            gunScript.enable = false;
+            gunScript.GetComponent<Gun>().enabled = false;
             rb.isKinematic = false;
             BC.isTrigger = false;
         }
         if(equipped){
-            gunScript.enable = true;
+            gunScript.GetComponent<Gun>().enabled = true;
             rb.isKinematic = true;
             BC.isTrigger = true;
             slotFull = true;
@@ -37,10 +37,17 @@ public class PickUp : MonoBehaviour
     private void Update(){
         FPress = controls.Land.Pickup.ReadValue<bool>();
         Vector3 distanceToPlayer = player.position - transform.position;
-        if(!equipped && distanceToPlayer.magnitude <= pickUpRange && FPress && !slotFull) PickingUp();
+        if (!equipped && distanceToPlayer.magnitude <= pickUpRange && FPress && !slotFull) {
+            PickingUp();
+            Debug.Log("Pickup");
+        }
 
         Gpress = controls.Land.Drop.ReadValue<bool>();
-        if(equipped && Gpress) Drop();
+        if (equipped && Gpress)
+        {
+            Drop();
+            Debug.Log("Drop");
+        }
     }
     private void PickingUp(){
         equipped = true;
@@ -56,7 +63,7 @@ public class PickUp : MonoBehaviour
         BC.isTrigger = true;
 
         //enable gun script
-        gunScript.enable = true;
+        gunScript.GetComponent<Gun>().enabled = true;
 
     }
     private void Drop(){
@@ -64,7 +71,7 @@ public class PickUp : MonoBehaviour
         slotFull = false;
 
         //set parent to null to get rid of it being a child aka drop
-        transform.SetParent(null);
+        transform.SetParent(null, true);
     
         rb.isKinematic = false;
         BC.isTrigger = false;
@@ -79,6 +86,6 @@ public class PickUp : MonoBehaviour
         float random = Random.Range(-1f,1f);
         rb.AddTorque(new Vector3(random, random, random) * 10);
         //disable gun script
-        gunScript.enable = false;
+        gunScript.GetComponent<Gun>().enabled = false;
     }
 }

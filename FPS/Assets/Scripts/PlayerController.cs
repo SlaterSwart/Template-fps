@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
         if (aimAction.IsPressed())
         {
             camera_FOV = 40;
-            Debug.Log("Aim");
+            //Debug.Log("Aim");
         }
         else if(!aimAction.IsPressed()) camera_FOV = 60;
         Cursor.lockState = CursorLockMode.Locked;

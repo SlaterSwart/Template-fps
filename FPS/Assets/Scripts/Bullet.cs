@@ -10,10 +10,6 @@ public class Bullet : MonoBehaviour
     {
         Destroy(gameObject, life);
     }
-    private void Update()
-    {
-       
-    }
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.tag == "Enemy") Destroy(collision.gameObject);
