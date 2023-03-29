@@ -71,6 +71,24 @@ public partial class @PlayerCon : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Drop"",
+                    ""type"": ""Button"",
+                    ""id"": ""bf1934eb-9c7d-4c6c-8451-5a4194d72eef"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pickup"",
+                    ""type"": ""Button"",
+                    ""id"": ""162ba14e-b441-4dd8-8d37-87aad1f48d6d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -165,11 +183,33 @@ public partial class @PlayerCon : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""37618f97-3714-4d8e-9165-de906fe01cee"",
-                    ""path"": ""<Mouse>/press"",
-                    ""interactions"": """",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": ""Hold"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""86f19399-2631-4a85-97eb-2d4b1822447b"",
+                    ""path"": ""<Keyboard>/g"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Drop"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""800ff248-176f-425c-be76-c3c1891b2e1a"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pickup"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -213,6 +253,8 @@ public partial class @PlayerCon : IInputActionCollection2, IDisposable
         m_Land_Shoot = m_Land.FindAction("Shoot", throwIfNotFound: true);
         m_Land_Look = m_Land.FindAction("Look", throwIfNotFound: true);
         m_Land_Aim = m_Land.FindAction("Aim", throwIfNotFound: true);
+        m_Land_Drop = m_Land.FindAction("Drop", throwIfNotFound: true);
+        m_Land_Pickup = m_Land.FindAction("Pickup", throwIfNotFound: true);
         // water
         m_water = asset.FindActionMap("water", throwIfNotFound: true);
         m_water_Newaction = m_water.FindAction("New action", throwIfNotFound: true);
@@ -280,6 +322,8 @@ public partial class @PlayerCon : IInputActionCollection2, IDisposable
     private readonly InputAction m_Land_Shoot;
     private readonly InputAction m_Land_Look;
     private readonly InputAction m_Land_Aim;
+    private readonly InputAction m_Land_Drop;
+    private readonly InputAction m_Land_Pickup;
     public struct LandActions
     {
         private @PlayerCon m_Wrapper;
@@ -289,6 +333,8 @@ public partial class @PlayerCon : IInputActionCollection2, IDisposable
         public InputAction @Shoot => m_Wrapper.m_Land_Shoot;
         public InputAction @Look => m_Wrapper.m_Land_Look;
         public InputAction @Aim => m_Wrapper.m_Land_Aim;
+        public InputAction @Drop => m_Wrapper.m_Land_Drop;
+        public InputAction @Pickup => m_Wrapper.m_Land_Pickup;
         public InputActionMap Get() { return m_Wrapper.m_Land; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -313,6 +359,12 @@ public partial class @PlayerCon : IInputActionCollection2, IDisposable
                 @Aim.started -= m_Wrapper.m_LandActionsCallbackInterface.OnAim;
                 @Aim.performed -= m_Wrapper.m_LandActionsCallbackInterface.OnAim;
                 @Aim.canceled -= m_Wrapper.m_LandActionsCallbackInterface.OnAim;
+                @Drop.started -= m_Wrapper.m_LandActionsCallbackInterface.OnDrop;
+                @Drop.performed -= m_Wrapper.m_LandActionsCallbackInterface.OnDrop;
+                @Drop.canceled -= m_Wrapper.m_LandActionsCallbackInterface.OnDrop;
+                @Pickup.started -= m_Wrapper.m_LandActionsCallbackInterface.OnPickup;
+                @Pickup.performed -= m_Wrapper.m_LandActionsCallbackInterface.OnPickup;
+                @Pickup.canceled -= m_Wrapper.m_LandActionsCallbackInterface.OnPickup;
             }
             m_Wrapper.m_LandActionsCallbackInterface = instance;
             if (instance != null)
@@ -332,6 +384,12 @@ public partial class @PlayerCon : IInputActionCollection2, IDisposable
                 @Aim.started += instance.OnAim;
                 @Aim.performed += instance.OnAim;
                 @Aim.canceled += instance.OnAim;
+                @Drop.started += instance.OnDrop;
+                @Drop.performed += instance.OnDrop;
+                @Drop.canceled += instance.OnDrop;
+                @Pickup.started += instance.OnPickup;
+                @Pickup.performed += instance.OnPickup;
+                @Pickup.canceled += instance.OnPickup;
             }
         }
     }
@@ -376,6 +434,8 @@ public partial class @PlayerCon : IInputActionCollection2, IDisposable
         void OnShoot(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
+        void OnDrop(InputAction.CallbackContext context);
+        void OnPickup(InputAction.CallbackContext context);
     }
     public interface IWaterActions
     {

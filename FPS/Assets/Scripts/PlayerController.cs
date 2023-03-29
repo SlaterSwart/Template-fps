@@ -18,6 +18,10 @@ public class PlayerController : MonoBehaviour
     private InputAction moveAction;
     private InputAction jumpAction;
     private InputAction mouseAction;
+    private InputAction aimAction;
+
+    private GameObject Camera;
+    public float camera_FOV = 0f;
 
     Vector2 mouseInput;
     private void Awake()
@@ -27,11 +31,21 @@ public class PlayerController : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         moveAction = playerInput.actions["Move"];
         jumpAction = playerInput.actions["jump"];
+        aimAction = playerInput.actions["Aim"];
+        Camera = GameObject.Find("Main Camera");
+        
     }
 
 
     void Update()
     {
+        Camera.GetComponent<Camera>().fieldOfView = camera_FOV;
+        if (aimAction.IsPressed())
+        {
+            camera_FOV = 40;
+            Debug.Log("Aim");
+        }
+        else if(!aimAction.IsPressed()) camera_FOV = 60;
         Cursor.lockState = CursorLockMode.Locked;
         groundedPlayer = controller.isGrounded;
         if (groundedPlayer && playerVelocity.y < 0)

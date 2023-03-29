@@ -3,7 +3,11 @@ guid: c1cb294542c124600b4211262f2bac47
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - bulletSpawnPoint: {instanceID: 0}
+  - bulletPrefab: {instanceID: 0}
+  - source: {instanceID: 0}
+  - clip: {fileID: 8300000, guid: c4b69c01b2acf8f42b2c1cc67e7a9c07, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
