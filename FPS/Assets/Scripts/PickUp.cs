@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(CharacterController), typeof(PlayerInput))]
 public class PickUp : MonoBehaviour
 {
+    static bool enemyDead;
+    public bool equippedByEnemy;
     private PlayerCon controls;
 
     private bool FPress;
@@ -19,11 +22,25 @@ public class PickUp : MonoBehaviour
 
     public bool equipped;
     public static bool slotFull;
+    private PlayerInput playerInput;
+    private InputAction dropKey;
+    private InputAction pickUpKey;
 
     private void Start(){
-        controls = new PlayerCon();
+        playerInput = GetComponent<PlayerInput>();
+        dropKey = playerInput.actions["Drop"];
+        pickUpKey = playerInput.actions["Pickup"];
         if(!equipped){
             gunScript.GetComponent<Gun>().enabled = false;
+            rb.isKinematic = false;
+            BC.isTrigger = false;
+        }
+        if(equippedByEnemy){
+            rb.isKinematic = true;
+            BC.isTrigger = true;
+        }
+        if(enemyDead){
+            equippedByEnemy = false;
             rb.isKinematic = false;
             BC.isTrigger = false;
         }
@@ -35,18 +52,18 @@ public class PickUp : MonoBehaviour
         }
     }
     private void Update(){
-        FPress = controls.Land.Pickup.ReadValue<bool>();
+    
         Vector3 distanceToPlayer = player.position - transform.position;
-        if (!equipped && distanceToPlayer.magnitude <= pickUpRange && FPress && !slotFull) {
+        if (!equipped && distanceToPlayer.magnitude <= pickUpRange && pickUpKey.triggered && !slotFull) {
             PickingUp();
-            Debug.Log("Pickup");
+            //Debug.Log("Pickup");
         }
 
-        Gpress = controls.Land.Drop.ReadValue<bool>();
-        if (equipped && Gpress)
+        
+        if (equipped && dropKey.triggered)
         {
             Drop();
-            Debug.Log("Drop");
+            //Debug.Log("Drop");
         }
     }
     private void PickingUp(){
@@ -54,13 +71,15 @@ public class PickUp : MonoBehaviour
         slotFull = true;
 
         //make weapon a child of the cam and move to hands
+        rb.isKinematic = true;
+        BC.isTrigger = true;
         transform.SetParent(Holder);
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.Euler(Vector3.zero);
-        transform.localScale = Vector3.one;
+        transform.localScale = new Vector3(0.2980717f, 1.432908f, 3.140973f);
 
-        rb.isKinematic = true;
-        BC.isTrigger = true;
+
+     
 
         //enable gun script
         gunScript.GetComponent<Gun>().enabled = true;

@@ -13,6 +13,8 @@ public class Gun : MonoBehaviour
 
     public GameObject bulletPrefab;
     public float bulletSpeed = 50;
+    public bool fullAuto;
+
 
     //audio stuff
     public AudioSource source;
@@ -27,7 +29,6 @@ public class Gun : MonoBehaviour
 
     private void Update()
     {
-
         if (shootAction.triggered)
         {
             //Debug.Log("shot");

@@ -34,6 +34,7 @@ public class MouseLook : MonoBehaviour
         xRotation = Mathf.Clamp(xRotation, -90f, 90f); //clamp
 
         transform.rotation = UnityEngine.Quaternion.Euler(xRotation, yRotation, 0);
+        Orientation.rotation = UnityEngine.Quaternion.Euler(0, yRotation, 0);
         playerBody.rotation = UnityEngine.Quaternion.Euler(0, yRotation, 0);
     }
     private void OnEnable()
