@@ -89,6 +89,15 @@ public partial class @PlayerCon : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Sprint"",
+                    ""type"": ""Button"",
+                    ""id"": ""46d68152-a41b-43cb-9aa7-5bd7aea2e301"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -212,6 +221,17 @@ public partial class @PlayerCon : IInputActionCollection2, IDisposable
                     ""action"": ""Pickup"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3786b904-3758-4d8d-a1d7-3ef676d19edf"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": ""Hold"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -255,6 +275,7 @@ public partial class @PlayerCon : IInputActionCollection2, IDisposable
         m_Land_Aim = m_Land.FindAction("Aim", throwIfNotFound: true);
         m_Land_Drop = m_Land.FindAction("Drop", throwIfNotFound: true);
         m_Land_Pickup = m_Land.FindAction("Pickup", throwIfNotFound: true);
+        m_Land_Sprint = m_Land.FindAction("Sprint", throwIfNotFound: true);
         // water
         m_water = asset.FindActionMap("water", throwIfNotFound: true);
         m_water_Newaction = m_water.FindAction("New action", throwIfNotFound: true);
@@ -324,6 +345,7 @@ public partial class @PlayerCon : IInputActionCollection2, IDisposable
     private readonly InputAction m_Land_Aim;
     private readonly InputAction m_Land_Drop;
     private readonly InputAction m_Land_Pickup;
+    private readonly InputAction m_Land_Sprint;
     public struct LandActions
     {
         private @PlayerCon m_Wrapper;
@@ -335,6 +357,7 @@ public partial class @PlayerCon : IInputActionCollection2, IDisposable
         public InputAction @Aim => m_Wrapper.m_Land_Aim;
         public InputAction @Drop => m_Wrapper.m_Land_Drop;
         public InputAction @Pickup => m_Wrapper.m_Land_Pickup;
+        public InputAction @Sprint => m_Wrapper.m_Land_Sprint;
         public InputActionMap Get() { return m_Wrapper.m_Land; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -365,6 +388,9 @@ public partial class @PlayerCon : IInputActionCollection2, IDisposable
                 @Pickup.started -= m_Wrapper.m_LandActionsCallbackInterface.OnPickup;
                 @Pickup.performed -= m_Wrapper.m_LandActionsCallbackInterface.OnPickup;
                 @Pickup.canceled -= m_Wrapper.m_LandActionsCallbackInterface.OnPickup;
+                @Sprint.started -= m_Wrapper.m_LandActionsCallbackInterface.OnSprint;
+                @Sprint.performed -= m_Wrapper.m_LandActionsCallbackInterface.OnSprint;
+                @Sprint.canceled -= m_Wrapper.m_LandActionsCallbackInterface.OnSprint;
             }
             m_Wrapper.m_LandActionsCallbackInterface = instance;
             if (instance != null)
@@ -390,6 +416,9 @@ public partial class @PlayerCon : IInputActionCollection2, IDisposable
                 @Pickup.started += instance.OnPickup;
                 @Pickup.performed += instance.OnPickup;
                 @Pickup.canceled += instance.OnPickup;
+                @Sprint.started += instance.OnSprint;
+                @Sprint.performed += instance.OnSprint;
+                @Sprint.canceled += instance.OnSprint;
             }
         }
     }
@@ -436,6 +465,7 @@ public partial class @PlayerCon : IInputActionCollection2, IDisposable
         void OnAim(InputAction.CallbackContext context);
         void OnDrop(InputAction.CallbackContext context);
         void OnPickup(InputAction.CallbackContext context);
+        void OnSprint(InputAction.CallbackContext context);
     }
     public interface IWaterActions
     {

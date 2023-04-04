@@ -14,14 +14,17 @@ public class PlayerController : MonoBehaviour
     private PlayerInput playerInput;
     private Vector3 playerVelocity;
     private bool groundedPlayer;
+    Vector3 moveDirection;
 
     private InputAction moveAction;
     private InputAction jumpAction;
     private InputAction mouseAction;
     private InputAction aimAction;
+    private InputAction sprintAction;
 
     private GameObject Camera;
     public float camera_FOV = 0f;
+    public Transform Orientation;
 
     Vector2 mouseInput;
     private void Awake()
@@ -32,6 +35,7 @@ public class PlayerController : MonoBehaviour
         moveAction = playerInput.actions["Move"];
         jumpAction = playerInput.actions["jump"];
         aimAction = playerInput.actions["Aim"];
+        sprintAction = playerInput.actions["Sprint"];
         Camera = GameObject.Find("Main Camera");
         
     }
@@ -40,21 +44,27 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Camera.GetComponent<Camera>().fieldOfView = camera_FOV;
-        if (aimAction.IsPressed())
+
+        if(sprintAction.IsPressed()) playerSpeed = 4.0f; //Sprint
+        else playerSpeed = 2.0f;
+
+        if (aimAction.IsPressed()) //aim
         {
             camera_FOV = 40;
             //Debug.Log("Aim");
         }
         else if(!aimAction.IsPressed()) camera_FOV = 60;
+
         Cursor.lockState = CursorLockMode.Locked;
         groundedPlayer = controller.isGrounded;
-        if (groundedPlayer && playerVelocity.y < 0)
+        if (groundedPlayer && playerVelocity.y < 0) //jump
         {
             playerVelocity.y = 0f;
         }
 
         Vector2 input = moveAction.ReadValue<Vector2>();
         Vector3 move = new Vector3(input.x, 0, input.y);
+        //Vector3 moveDirection = Orientation.forward * input.y + Orientation.right * input.x;
         controller.Move(move * Time.deltaTime * playerSpeed);
 
         // Changes the height position of the player..
