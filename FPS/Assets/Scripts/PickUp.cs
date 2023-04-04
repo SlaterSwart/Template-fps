@@ -26,7 +26,7 @@ public class PickUp : MonoBehaviour
 
     private void Start() {
         playerInput = GetComponent<PlayerInput>();
-        pickingUpAction = playerInput.actions["Pick Up"];
+        pickingUpAction = playerInput.actions["Pickup"];
         dropAction = playerInput.actions["Drop"];
 
         if (!equipped){
@@ -48,11 +48,16 @@ public class PickUp : MonoBehaviour
             Debug.Log("Pickup");
         }
 
-        
-        if (equipped && dropAction.triggered)
+
+        if (equipped /*&& dropAction.triggered*/)
         {
+            if (dropAction.triggered)
+            {
             Drop();
+
             Debug.Log("Drop");
+            }
+          
         }
     }
     private void PickingUp(){
@@ -90,7 +95,7 @@ public class PickUp : MonoBehaviour
         rb.AddForce(fpsCam.up * dropUpwardForce, ForceMode.Impulse);
         //Random flips
         float random = Random.Range(-1f,1f);
-        rb.AddTorque(new Vector3(random, random, random) * 10);
+        rb.AddTorque(new Vector3(random, random, random) * 5);
         //disable gun script
         gunScript.GetComponent<Gun>().enabled = false;
     }

@@ -14,6 +14,7 @@ public class Gun : MonoBehaviour
     public GameObject bulletPrefab;
     public float bulletSpeed = 50;
     public bool fullAuto;
+    public bool burst;
 
 
     //audio stuff
