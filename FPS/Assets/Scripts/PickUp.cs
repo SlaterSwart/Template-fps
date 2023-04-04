@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(CharacterController), typeof(PlayerInput))]
 public class PickUp : MonoBehaviour
 {
     private PlayerCon controls;
@@ -17,12 +18,18 @@ public class PickUp : MonoBehaviour
     public float pickUpRange;
     public float dropFowardForce, dropUpwardForce;
 
+    private PlayerInput playerInput;
+    private InputAction pickingUpAction;
+    private InputAction dropAction;
     public bool equipped;
     public static bool slotFull;
 
-    private void Start(){
-        controls = new PlayerCon();
-        if(!equipped){
+    private void Start() {
+        playerInput = GetComponent<PlayerInput>();
+        pickingUpAction = playerInput.actions["Pick Up"];
+        dropAction = playerInput.actions["Drop"];
+
+        if (!equipped){
             gunScript.GetComponent<Gun>().enabled = false;
             rb.isKinematic = false;
             BC.isTrigger = false;
@@ -34,16 +41,15 @@ public class PickUp : MonoBehaviour
             slotFull = true;
         }
     }
-    private void Update(){
-        FPress = controls.Land.Pickup.ReadValue<bool>();
+    private void Update() { 
         Vector3 distanceToPlayer = player.position - transform.position;
-        if (!equipped && distanceToPlayer.magnitude <= pickUpRange && FPress && !slotFull) {
+        if (!equipped && distanceToPlayer.magnitude <= pickUpRange && pickingUpAction.triggered && !slotFull) {
             PickingUp();
             Debug.Log("Pickup");
         }
 
-        Gpress = controls.Land.Drop.ReadValue<bool>();
-        if (equipped && Gpress)
+        
+        if (equipped && dropAction.triggered)
         {
             Drop();
             Debug.Log("Drop");
@@ -57,7 +63,7 @@ public class PickUp : MonoBehaviour
         transform.SetParent(Holder);
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.Euler(Vector3.zero);
-        transform.localScale = Vector3.one;
+        transform.localScale = new Vector3(0.2980717f, 1.432908f, 3.140973f);
 
         rb.isKinematic = true;
         BC.isTrigger = true;
