@@ -89,12 +89,12 @@ public class PickUp : MonoBehaviour
 
         //carry momentum from player
         rb.velocity = player.GetComponent<Rigidbody>().velocity;
-
+        
         //add force
         rb.AddForce(fpsCam.forward * dropFowardForce, ForceMode.Impulse);
         rb.AddForce(fpsCam.up * dropUpwardForce, ForceMode.Impulse);
         //Random flips
-        float random = Random.Range(-1f,1f);
+        float random = Random.Range(-0.4f,0.2f);
         rb.AddTorque(new Vector3(random, random, random) * 5);
         //disable gun script
         gunScript.GetComponent<Gun>().enabled = false;

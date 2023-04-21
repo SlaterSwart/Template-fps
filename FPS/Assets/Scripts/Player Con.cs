@@ -107,6 +107,15 @@ public partial class @PlayerCon : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Reload"",
+                    ""type"": ""Button"",
+                    ""id"": ""e88b3814-51bf-4442-9b54-239a3d7112e2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -252,6 +261,17 @@ public partial class @PlayerCon : IInputActionCollection2, IDisposable
                     ""action"": ""Firemode"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""351931d5-5b18-45d4-a363-165699b26265"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -297,6 +317,7 @@ public partial class @PlayerCon : IInputActionCollection2, IDisposable
         m_Land_Pickup = m_Land.FindAction("Pickup", throwIfNotFound: true);
         m_Land_Sprint = m_Land.FindAction("Sprint", throwIfNotFound: true);
         m_Land_Firemode = m_Land.FindAction("Firemode", throwIfNotFound: true);
+        m_Land_Reload = m_Land.FindAction("Reload", throwIfNotFound: true);
         // water
         m_water = asset.FindActionMap("water", throwIfNotFound: true);
         m_water_Newaction = m_water.FindAction("New action", throwIfNotFound: true);
@@ -368,6 +389,7 @@ public partial class @PlayerCon : IInputActionCollection2, IDisposable
     private readonly InputAction m_Land_Pickup;
     private readonly InputAction m_Land_Sprint;
     private readonly InputAction m_Land_Firemode;
+    private readonly InputAction m_Land_Reload;
     public struct LandActions
     {
         private @PlayerCon m_Wrapper;
@@ -381,6 +403,7 @@ public partial class @PlayerCon : IInputActionCollection2, IDisposable
         public InputAction @Pickup => m_Wrapper.m_Land_Pickup;
         public InputAction @Sprint => m_Wrapper.m_Land_Sprint;
         public InputAction @Firemode => m_Wrapper.m_Land_Firemode;
+        public InputAction @Reload => m_Wrapper.m_Land_Reload;
         public InputActionMap Get() { return m_Wrapper.m_Land; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -417,6 +440,9 @@ public partial class @PlayerCon : IInputActionCollection2, IDisposable
                 @Firemode.started -= m_Wrapper.m_LandActionsCallbackInterface.OnFiremode;
                 @Firemode.performed -= m_Wrapper.m_LandActionsCallbackInterface.OnFiremode;
                 @Firemode.canceled -= m_Wrapper.m_LandActionsCallbackInterface.OnFiremode;
+                @Reload.started -= m_Wrapper.m_LandActionsCallbackInterface.OnReload;
+                @Reload.performed -= m_Wrapper.m_LandActionsCallbackInterface.OnReload;
+                @Reload.canceled -= m_Wrapper.m_LandActionsCallbackInterface.OnReload;
             }
             m_Wrapper.m_LandActionsCallbackInterface = instance;
             if (instance != null)
@@ -448,6 +474,9 @@ public partial class @PlayerCon : IInputActionCollection2, IDisposable
                 @Firemode.started += instance.OnFiremode;
                 @Firemode.performed += instance.OnFiremode;
                 @Firemode.canceled += instance.OnFiremode;
+                @Reload.started += instance.OnReload;
+                @Reload.performed += instance.OnReload;
+                @Reload.canceled += instance.OnReload;
             }
         }
     }
@@ -496,6 +525,7 @@ public partial class @PlayerCon : IInputActionCollection2, IDisposable
         void OnPickup(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
         void OnFiremode(InputAction.CallbackContext context);
+        void OnReload(InputAction.CallbackContext context);
     }
     public interface IWaterActions
     {

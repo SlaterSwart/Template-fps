@@ -12,7 +12,11 @@ public class Bullet : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Enemy") Destroy(collision.gameObject);
+        if (collision.gameObject.tag == "Enemy"){
+            
+            collision.gameObject.GetComponentInChildren<Transform>().SetParent(null, true);
+            Destroy(collision.gameObject);
+        }
         Destroy(gameObject);
     }
 }
