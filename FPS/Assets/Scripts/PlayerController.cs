@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -24,7 +25,12 @@ public class PlayerController : MonoBehaviour
 
     private GameObject Camera;
     public float camera_FOV = 0f;
+    public float default_FOV = 60f;
+    public float zoomM = 2;
     public Transform Orientation;
+    private Transform restPos;
+    private Transform zoomPos;
+    public GameObject Holder;
 
     Vector2 mouseInput;
     private void Awake()
@@ -37,24 +43,52 @@ public class PlayerController : MonoBehaviour
         aimAction = playerInput.actions["Aim"];
         sprintAction = playerInput.actions["Sprint"];
         Camera = GameObject.Find("Main Camera");
-        
+
+        Holder = GameObject.Find("Holder");
+        restPos.position = Holder.transform.localPosition;
+        zoomPos.position = new Vector3(0.342999995f, -1.38900006f, 0.497999996f);
+
     }
 
+    private float t = 0;
+    
+    private IEnumerator ZoomOutE(GameObject Camera, float camera_FOV, GameObject Holder)
+    {
+        
+        while (t > 0)
+        {
+            t -= 5 * Time.deltaTime;
+            camera_FOV = Mathf.Lerp(default_FOV, default_FOV / zoomM, t);
+            Camera.GetComponent<Camera>().fieldOfView = camera_FOV;
+            Holder.transform.localPosition = new Vector3(Mathf.Lerp(restPos.position.x, zoomPos.position.x, t), Mathf.Lerp(restPos.position.y, zoomPos.position.y, t), Mathf.Lerp(restPos.position.z, zoomPos.position.z, t));
+            //Debug.Log(camera_FOV);
+            yield return null;
+        }
 
+    }
     void Update()
     {
         Camera.GetComponent<Camera>().fieldOfView = camera_FOV;
 
-        if(sprintAction.IsPressed()) playerSpeed = 4.0f; //Sprint
+        if (sprintAction.IsPressed()) playerSpeed = 4.0f; //Sprint
         else playerSpeed = 2.0f;
 
         if (aimAction.IsPressed()) //aim
         {
-            camera_FOV = 40;
+            if (t <= 1)
+            {
+                t += 5 * Time.deltaTime;
+            }
+            camera_FOV = Mathf.Lerp(default_FOV, default_FOV / zoomM, t);
+
             //Debug.Log("Aim");
         }
-        else if(!aimAction.IsPressed()) camera_FOV = 60;
-
+        else if (!aimAction.IsPressed())
+        if(aimAction.WasReleasedThisFrame())
+        {
+            StartCoroutine(ZoomOutE(Camera, camera_FOV, Holder));
+                camera_FOV = default_FOV;
+        }
         Cursor.lockState = CursorLockMode.Locked;
         groundedPlayer = controller.isGrounded;
         if (groundedPlayer && playerVelocity.y < 0) //jump
