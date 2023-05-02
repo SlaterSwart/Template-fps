@@ -44,9 +44,8 @@ public class PlayerController : MonoBehaviour
         sprintAction = playerInput.actions["Sprint"];
         Camera = GameObject.Find("Main Camera");
 
-        Holder = GameObject.Find("Holder");
-        restPos.position = Holder.transform.localPosition;
-        zoomPos.position = new Vector3(0.342999995f, -1.38900006f, 0.497999996f);
+        //restPos.position = new Vector3(0.626f, -1.5f, 0.5f);//Holder.transform.localPosition;
+        //zoomPos.position = new Vector3(0.342999995f, -1.38900006f, 0.497999996f);
 
     }
 
@@ -60,7 +59,7 @@ public class PlayerController : MonoBehaviour
             t -= 5 * Time.deltaTime;
             camera_FOV = Mathf.Lerp(default_FOV, default_FOV / zoomM, t);
             Camera.GetComponent<Camera>().fieldOfView = camera_FOV;
-            Holder.transform.localPosition = new Vector3(Mathf.Lerp(restPos.position.x, zoomPos.position.x, t), Mathf.Lerp(restPos.position.y, zoomPos.position.y, t), Mathf.Lerp(restPos.position.z, zoomPos.position.z, t));
+            //Holder.transform.localPosition = Vector3.Lerp(restPos.position, zoomPos.position, t);
             //Debug.Log(camera_FOV);
             yield return null;
         }

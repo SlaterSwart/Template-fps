@@ -127,5 +127,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a79ffbf003b44ce88e8a891a31ec0e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Fov: 0
+  Fov: 2
   life: 3

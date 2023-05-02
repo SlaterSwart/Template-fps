@@ -15,5 +15,23 @@ public class HealthScipt : MonoBehaviour
     private void Update()
     {
         Hp.text = "HP:" + HealthVal.ToString();
+        if (HealthVal <= 0)
+        {
+            
+        }
+    }
+
+
+    private void OnCollisionEnter(Collision collision)
+    {
+     if (collision.gameObject.tag == "Enemy")
+     {
+            collision.gameObject.GetComponentInChildren<Transform>().SetParent(null, true);
+
+            if (HealthVal > 0) HealthVal = HealthVal - 10;
+           
+      }
     }
 }
+
+

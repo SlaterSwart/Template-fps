@@ -15,6 +15,7 @@ public class Bullet : MonoBehaviour
         if (collision.gameObject.tag == "Enemy"){
             
             collision.gameObject.GetComponentInChildren<Transform>().SetParent(null, true);
+            collision.gameObject.GetComponent<Transform>().position;
             Destroy(collision.gameObject);
         }
         Destroy(gameObject);
