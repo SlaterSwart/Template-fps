@@ -94,6 +94,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "aaa686df-8353-47c5-82e5-8baeedde902d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -250,32 +259,15 @@
                     "action": "Reload",
                     "isComposite": false,
                     "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "water",
-            "id": "5efa8df1-dd98-4d33-9075-b2d79f0fdd9e",
-            "actions": [
-                {
-                    "name": "New action",
-                    "type": "Button",
-                    "id": "d191e60e-ac1b-4d75-af47-38499590cb4c",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
+                },
                 {
                     "name": "",
-                    "id": "83ca61c7-4c0d-4093-8c7b-56182b2a4b01",
-                    "path": "",
+                    "id": "341a2563-4742-4000-bda8-302973d320be",
+                    "path": "<Keyboard>/f",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
