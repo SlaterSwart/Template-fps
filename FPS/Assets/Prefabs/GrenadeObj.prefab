@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5953141496548382656
+--- !u!1 &4341252739930229245
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,49 +8,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6766280027039831903}
-  - component: {fileID: 7661638741891942410}
-  - component: {fileID: 6910713338488983782}
-  - component: {fileID: 3286732341587399507}
-  - component: {fileID: 3532373671013589416}
-  - component: {fileID: 3019029152090010379}
-  m_Layer: 0
-  m_Name: Upgrade
+  - component: {fileID: 3506016014373406488}
+  - component: {fileID: 875652874510362046}
+  - component: {fileID: 7882160277631443889}
+  - component: {fileID: 7600619916728912783}
+  - component: {fileID: 5325693340048359754}
+  m_Layer: 7
+  m_Name: GrenadeObj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6766280027039831903
+--- !u!4 &3506016014373406488
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5953141496548382656}
+  m_GameObject: {fileID: 4341252739930229245}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.22920854, y: 1.0307522, z: -1.445}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_LocalPosition: {x: -2.88, y: 0.78, z: -2.46}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &7661638741891942410
+--- !u!33 &875652874510362046
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5953141496548382656}
+  m_GameObject: {fileID: 4341252739930229245}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &6910713338488983782
+--- !u!23 &7882160277631443889
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5953141496548382656}
+  m_GameObject: {fileID: 4341252739930229245}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -64,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8bb64d7dfdeff4d48acc8dcf8d5cdd12, type: 2}
+  - {fileID: 2100000, guid: e86651f0f8b6a407dbc28180c7eb3d0c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -86,38 +85,26 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &3286732341587399507
-MonoBehaviour:
+--- !u!135 &7600619916728912783
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5953141496548382656}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c8469c6091b24da5b6e054de3ddfc76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!65 &3532373671013589416
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5953141496548382656}
+  m_GameObject: {fileID: 4341252739930229245}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &3019029152090010379
+--- !u!54 &5325693340048359754
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5953141496548382656}
+  m_GameObject: {fileID: 4341252739930229245}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -125,5 +112,5 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 32
-  m_CollisionDetection: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
