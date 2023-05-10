@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour
 
     private InputAction moveAction;
     private InputAction jumpAction;
-    private InputAction mouseAction;
     private InputAction aimAction;
     private InputAction sprintAction;
 
@@ -39,7 +38,7 @@ public class PlayerController : MonoBehaviour
         controller = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
         moveAction = playerInput.actions["Move"];
-        jumpAction = playerInput.actions["jump"];
+        jumpAction = playerInput.actions["Jump"];
         aimAction = playerInput.actions["Aim"];
         sprintAction = playerInput.actions["Sprint"];
         Camera = GameObject.Find("Main Camera");

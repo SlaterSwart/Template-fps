@@ -73,6 +73,15 @@ public partial class @PlayerCon : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Grenade"",
+                    ""type"": ""Button"",
+                    ""id"": ""bdce415d-3454-4068-87ce-683a49c93fb4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Drop"",
                     ""type"": ""Button"",
                     ""id"": ""bf1934eb-9c7d-4c6c-8451-5a4194d72eef"",
@@ -121,15 +130,6 @@ public partial class @PlayerCon : IInputActionCollection2, IDisposable
                     ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""aaa686df-8353-47c5-82e5-8baeedde902d"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Grenade"",
-                    ""type"": ""Button"",
-                    ""id"": ""bdce415d-3454-4068-87ce-683a49c93fb4"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -313,23 +313,23 @@ public partial class @PlayerCon : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""6f00fb2e-7f3e-4710-aad7-eff4dfd95a38"",
-                    ""path"": ""<Keyboard>/4"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Grenade"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""f09b9898-edb7-4ff6-bcf7-50deb9e855d4"",
                     ""path"": ""<Keyboard>/1"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Primary"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6f00fb2e-7f3e-4710-aad7-eff4dfd95a38"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Grenade"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -345,13 +345,13 @@ public partial class @PlayerCon : IInputActionCollection2, IDisposable
         m_Land_Shoot = m_Land.FindAction("Shoot", throwIfNotFound: true);
         m_Land_Look = m_Land.FindAction("Look", throwIfNotFound: true);
         m_Land_Aim = m_Land.FindAction("Aim", throwIfNotFound: true);
+        m_Land_Grenade = m_Land.FindAction("Grenade", throwIfNotFound: true);
         m_Land_Drop = m_Land.FindAction("Drop", throwIfNotFound: true);
         m_Land_Pickup = m_Land.FindAction("Pickup", throwIfNotFound: true);
         m_Land_Sprint = m_Land.FindAction("Sprint", throwIfNotFound: true);
         m_Land_Firemode = m_Land.FindAction("Firemode", throwIfNotFound: true);
         m_Land_Reload = m_Land.FindAction("Reload", throwIfNotFound: true);
         m_Land_Interact = m_Land.FindAction("Interact", throwIfNotFound: true);
-        m_Land_Grenade = m_Land.FindAction("Grenade", throwIfNotFound: true);
         m_Land_Primary = m_Land.FindAction("Primary", throwIfNotFound: true);
     }
 
@@ -417,13 +417,13 @@ public partial class @PlayerCon : IInputActionCollection2, IDisposable
     private readonly InputAction m_Land_Shoot;
     private readonly InputAction m_Land_Look;
     private readonly InputAction m_Land_Aim;
+    private readonly InputAction m_Land_Grenade;
     private readonly InputAction m_Land_Drop;
     private readonly InputAction m_Land_Pickup;
     private readonly InputAction m_Land_Sprint;
     private readonly InputAction m_Land_Firemode;
     private readonly InputAction m_Land_Reload;
     private readonly InputAction m_Land_Interact;
-    private readonly InputAction m_Land_Grenade;
     private readonly InputAction m_Land_Primary;
     public struct LandActions
     {
@@ -434,13 +434,13 @@ public partial class @PlayerCon : IInputActionCollection2, IDisposable
         public InputAction @Shoot => m_Wrapper.m_Land_Shoot;
         public InputAction @Look => m_Wrapper.m_Land_Look;
         public InputAction @Aim => m_Wrapper.m_Land_Aim;
+        public InputAction @Grenade => m_Wrapper.m_Land_Grenade;
         public InputAction @Drop => m_Wrapper.m_Land_Drop;
         public InputAction @Pickup => m_Wrapper.m_Land_Pickup;
         public InputAction @Sprint => m_Wrapper.m_Land_Sprint;
         public InputAction @Firemode => m_Wrapper.m_Land_Firemode;
         public InputAction @Reload => m_Wrapper.m_Land_Reload;
         public InputAction @Interact => m_Wrapper.m_Land_Interact;
-        public InputAction @Grenade => m_Wrapper.m_Land_Grenade;
         public InputAction @Primary => m_Wrapper.m_Land_Primary;
         public InputActionMap Get() { return m_Wrapper.m_Land; }
         public void Enable() { Get().Enable(); }
@@ -466,6 +466,9 @@ public partial class @PlayerCon : IInputActionCollection2, IDisposable
                 @Aim.started -= m_Wrapper.m_LandActionsCallbackInterface.OnAim;
                 @Aim.performed -= m_Wrapper.m_LandActionsCallbackInterface.OnAim;
                 @Aim.canceled -= m_Wrapper.m_LandActionsCallbackInterface.OnAim;
+                @Grenade.started -= m_Wrapper.m_LandActionsCallbackInterface.OnGrenade;
+                @Grenade.performed -= m_Wrapper.m_LandActionsCallbackInterface.OnGrenade;
+                @Grenade.canceled -= m_Wrapper.m_LandActionsCallbackInterface.OnGrenade;
                 @Drop.started -= m_Wrapper.m_LandActionsCallbackInterface.OnDrop;
                 @Drop.performed -= m_Wrapper.m_LandActionsCallbackInterface.OnDrop;
                 @Drop.canceled -= m_Wrapper.m_LandActionsCallbackInterface.OnDrop;
@@ -484,9 +487,6 @@ public partial class @PlayerCon : IInputActionCollection2, IDisposable
                 @Interact.started -= m_Wrapper.m_LandActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_LandActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_LandActionsCallbackInterface.OnInteract;
-                @Grenade.started -= m_Wrapper.m_LandActionsCallbackInterface.OnGrenade;
-                @Grenade.performed -= m_Wrapper.m_LandActionsCallbackInterface.OnGrenade;
-                @Grenade.canceled -= m_Wrapper.m_LandActionsCallbackInterface.OnGrenade;
                 @Primary.started -= m_Wrapper.m_LandActionsCallbackInterface.OnPrimary;
                 @Primary.performed -= m_Wrapper.m_LandActionsCallbackInterface.OnPrimary;
                 @Primary.canceled -= m_Wrapper.m_LandActionsCallbackInterface.OnPrimary;
@@ -509,6 +509,9 @@ public partial class @PlayerCon : IInputActionCollection2, IDisposable
                 @Aim.started += instance.OnAim;
                 @Aim.performed += instance.OnAim;
                 @Aim.canceled += instance.OnAim;
+                @Grenade.started += instance.OnGrenade;
+                @Grenade.performed += instance.OnGrenade;
+                @Grenade.canceled += instance.OnGrenade;
                 @Drop.started += instance.OnDrop;
                 @Drop.performed += instance.OnDrop;
                 @Drop.canceled += instance.OnDrop;
@@ -527,9 +530,6 @@ public partial class @PlayerCon : IInputActionCollection2, IDisposable
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
-                @Grenade.started += instance.OnGrenade;
-                @Grenade.performed += instance.OnGrenade;
-                @Grenade.canceled += instance.OnGrenade;
                 @Primary.started += instance.OnPrimary;
                 @Primary.performed += instance.OnPrimary;
                 @Primary.canceled += instance.OnPrimary;
@@ -544,13 +544,13 @@ public partial class @PlayerCon : IInputActionCollection2, IDisposable
         void OnShoot(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
+        void OnGrenade(InputAction.CallbackContext context);
         void OnDrop(InputAction.CallbackContext context);
         void OnPickup(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
         void OnFiremode(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
-        void OnGrenade(InputAction.CallbackContext context);
         void OnPrimary(InputAction.CallbackContext context);
     }
 }
