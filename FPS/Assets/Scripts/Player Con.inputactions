@@ -121,6 +121,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Throw",
+                    "type": "Button",
+                    "id": "b7a255f6-4ee1-4c7d-af1d-460dba205f3b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -308,6 +317,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Grenade",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a416f07c-0f4e-4ea5-8f2d-4f0b31ece8c8",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Throw",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
