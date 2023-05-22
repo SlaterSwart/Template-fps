@@ -24,7 +24,7 @@ public class SwitchWeapon : MonoBehaviour
         PrimaryInput = playerInput.actions["Primary"];
         Grenade = GameObject.Find("GrenadeObj");
         PrimaryGun = GameObject.Find("Firearm");
-        
+        Grenade.SetActive(false);
     }
 
     private void Update()

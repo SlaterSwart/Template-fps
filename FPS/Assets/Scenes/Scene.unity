@@ -245,11 +245,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3506016014373406488, guid: 5336820ae680c46318d19806a58c72f4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.101
+      value: 0.194
       objectReference: {fileID: 0}
     - target: {fileID: 3506016014373406488, guid: 5336820ae680c46318d19806a58c72f4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.002
+      value: 1.086
       objectReference: {fileID: 0}
     - target: {fileID: 3506016014373406488, guid: 5336820ae680c46318d19806a58c72f4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -293,7 +293,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4341252739930229245, guid: 5336820ae680c46318d19806a58c72f4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5325693340048359754, guid: 5336820ae680c46318d19806a58c72f4, type: 3}
+      propertyPath: m_Mass
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5325693340048359754, guid: 5336820ae680c46318d19806a58c72f4, type: 3}
       propertyPath: m_UseGravity
@@ -303,8 +307,17 @@ PrefabInstance:
       propertyPath: m_IsKinematic
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7600619916728912783, guid: 5336820ae680c46318d19806a58c72f4, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5336820ae680c46318d19806a58c72f4, type: 3}
+--- !u!1 &58484400 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4341252739930229245, guid: 5336820ae680c46318d19806a58c72f4, type: 3}
+  m_PrefabInstance: {fileID: 58484399}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &65355052
 GameObject:
   m_ObjectHideFlags: 0
@@ -1746,6 +1759,82 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3506016014373406488, guid: 5336820ae680c46318d19806a58c72f4, type: 3}
   m_PrefabInstance: {fileID: 58484399}
   m_PrefabAsset: {fileID: 0}
+--- !u!54 &1031343214 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 5325693340048359754, guid: 5336820ae680c46318d19806a58c72f4, type: 3}
+  m_PrefabInstance: {fileID: 58484399}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &1031343215 stripped
+SphereCollider:
+  m_CorrespondingSourceObject: {fileID: 7600619916728912783, guid: 5336820ae680c46318d19806a58c72f4, type: 3}
+  m_PrefabInstance: {fileID: 58484399}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1031343218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 58484400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe9cbe6da3fcc4aa3a45262fc402dd17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  throwSpeed: 5
+  grenade: {fileID: 58484400}
+  GrenadeSpeed: 10
+  RB: {fileID: 1031343214}
+  BoxC: {fileID: 1031343215}
+  IsThrown: 0
+--- !u!114 &1031343219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 58484400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 30e12fea96361fe49ab8f97051b8333a, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Land
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!143 &1031343220
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 58484400}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 0.999999
+  m_Radius: 0.49999997
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1056826578
 GameObject:
   m_ObjectHideFlags: 0
@@ -1859,7 +1948,7 @@ GameObject:
   - component: {fileID: 1137522312}
   - component: {fileID: 1137522317}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Joey
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

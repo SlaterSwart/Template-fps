@@ -13,6 +13,9 @@ public class Grenade : MonoBehaviour
     private InputAction Throw;
     public GameObject grenade;
     public int GrenadeSpeed;
+    public Rigidbody RB;
+    public SphereCollider BoxC;
+    public bool IsThrown;
 
     private void Awake()
     {
@@ -22,11 +25,23 @@ public class Grenade : MonoBehaviour
     }
     private void Update()
     {
-        if (Throw.triggered)
+        if (Throw.triggered && IsThrown == false)
         {
-            grenade.GetComponent<Rigidbody>().velocity = grenade.GetComponent<Transform>().forward * GrenadeSpeed;
-            grenade.GetComponent<Transform>().
+            RB.isKinematic = false;
+            BoxC.isTrigger = false;            
+            RB.velocity = grenade.GetComponent<Transform>().forward * GrenadeSpeed;
+            grenade.GetComponent<Transform>().SetParent(null, true);
+            IsThrown = true;
+
         }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log(collision.gameObject);
+        
+        
+            
+        //Destroy(gameObject);
+    }
 }
