@@ -15,6 +15,9 @@ public class SwitchWeapon : MonoBehaviour
     private GameObject PrimaryGun;
     private GameObject Grenade;
 
+    private bool hasGrenade;
+    public Transform Holder;
+
     private bool grenadeActive = false;
     private bool primaryActive = true;
     private void Awake()
@@ -29,7 +32,8 @@ public class SwitchWeapon : MonoBehaviour
 
     private void Update()
     {
-    
+        
+        
         if (PrimaryInput.triggered && grenadeActive == true)
         {
             Grenade.SetActive(false);
@@ -38,7 +42,7 @@ public class SwitchWeapon : MonoBehaviour
             PrimaryGun.SetActive(true);
         }
 
-        if (grenadeInput.triggered && primaryActive == true)
+        if (grenadeInput.triggered && primaryActive == true && Grenade.GetComponent<Transform>().IsChildOf(Holder))
         {
             PrimaryGun.SetActive(false);
             primaryActive = false;

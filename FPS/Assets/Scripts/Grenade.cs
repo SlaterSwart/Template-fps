@@ -9,6 +9,8 @@ public class Grenade : MonoBehaviour
 
     public float throwSpeed;
 
+    public float fuseTime;
+
     private PlayerInput playerInput;
     private InputAction Throw;
     public GameObject grenade;
@@ -32,7 +34,14 @@ public class Grenade : MonoBehaviour
             RB.velocity = grenade.GetComponent<Transform>().forward * GrenadeSpeed;
             grenade.GetComponent<Transform>().SetParent(null, true);
             IsThrown = true;
+        }
 
+        if (fuseTime > 0 && IsThrown == true){
+            fuseTime -= Time.deltaTime;
+            Debug.Log(fuseTime);
+        }
+        else{
+            //expolsion
         }
     }
 
