@@ -18,6 +18,8 @@ public class Grenade : MonoBehaviour
     public Rigidbody RB;
     public SphereCollider BoxC;
     public bool IsThrown;
+    public float blastRad;
+
 
     private void Awake()
     {
@@ -27,6 +29,8 @@ public class Grenade : MonoBehaviour
     }
     private void Update()
     {
+        RaycastHit hit;
+
         if (Throw.triggered && IsThrown == false)
         {
             RB.isKinematic = false;
@@ -38,10 +42,9 @@ public class Grenade : MonoBehaviour
 
         if (fuseTime > 0 && IsThrown == true){
             fuseTime -= Time.deltaTime;
-            Debug.Log(fuseTime);
+            //Debug.Log(fuseTime);
         }
         else{
-            //expolsion
         }
     }
 

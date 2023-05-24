@@ -96,7 +96,7 @@ public class PickUp : MonoBehaviour
         transform.SetParent(null, true);
     
         //Random flips
-        float random = Random.Range(-0.1f,0.1f);
+        float random = Random.Range(-0.5f,0.5f);
         rb.AddTorque(new Vector3(random, random, random) * 5);
         //disable gun script
         gunScript.GetComponent<Gun>().enabled = false;
