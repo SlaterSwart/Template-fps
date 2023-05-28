@@ -20,6 +20,7 @@ public class Gun : MonoBehaviour
     public bool fullAuto;
     public bool burst;
     public int Ammo;
+    public int fireRate;
     private int ogAmmo;
 
     //audio stuff

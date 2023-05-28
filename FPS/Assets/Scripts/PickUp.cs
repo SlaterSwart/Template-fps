@@ -66,9 +66,9 @@ public class PickUp : MonoBehaviour
 
         //make weapon a child of the cam and move to hands
         transform.SetParent(Holder);
-        transform.localPosition = Vector3.zero;
+        transform.localPosition = new Vector3(0.165f, 1.036f, -0.3f);
         transform.localRotation = Quaternion.Euler(Vector3.zero);
-        transform.localScale = new Vector3(0.2980717f, 1.432908f, 3.140973f);
+        transform.localScale = new Vector3(0.27f, 0.4f, 1.14f);
 
         rb.isKinematic = true;
         BC.isTrigger = true;
@@ -81,9 +81,7 @@ public class PickUp : MonoBehaviour
         equipped = false;
         slotFull = false;
 
-        //set parent to null to get rid of it being a child aka drop
-        transform.SetParent(null, true);
-    
+        
         rb.isKinematic = false;
         BC.isTrigger = false;
 
@@ -93,8 +91,12 @@ public class PickUp : MonoBehaviour
         //add force
         rb.AddForce(fpsCam.forward * dropFowardForce, ForceMode.Impulse);
         rb.AddForce(fpsCam.up * dropUpwardForce, ForceMode.Impulse);
+
+        //set parent to null to get rid of it being a child aka drop
+        transform.SetParent(null, true);
+    
         //Random flips
-        float random = Random.Range(-0.4f,0.2f);
+        float random = Random.Range(-0.5f,0.5f);
         rb.AddTorque(new Vector3(random, random, random) * 5);
         //disable gun script
         gunScript.GetComponent<Gun>().enabled = false;

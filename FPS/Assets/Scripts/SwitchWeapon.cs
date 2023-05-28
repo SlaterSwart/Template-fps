@@ -1,0 +1,54 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+[RequireComponent(typeof(CharacterController), typeof(PlayerInput))]
+public class SwitchWeapon : MonoBehaviour
+{
+
+    private PlayerInput playerInput;
+
+    private InputAction grenadeInput;
+    private InputAction PrimaryInput;
+
+    private GameObject PrimaryGun;
+    private GameObject Grenade;
+
+    private bool hasGrenade;
+    public Transform Holder;
+
+    private bool grenadeActive = false;
+    private bool primaryActive = true;
+    private void Awake()
+    {
+        playerInput = GetComponent<PlayerInput>();
+        grenadeInput = playerInput.actions["Grenade"];
+        PrimaryInput = playerInput.actions["Primary"];
+        Grenade = GameObject.Find("GrenadeObj");
+        PrimaryGun = GameObject.Find("Firearm");
+        Grenade.SetActive(false);
+    }
+
+    private void Update()
+    {
+        
+        
+        if (PrimaryInput.triggered && grenadeActive == true)
+        {
+            Grenade.SetActive(false);
+            grenadeActive = false;
+            primaryActive = true;
+            PrimaryGun.SetActive(true);
+        }
+
+        if (grenadeInput.triggered && primaryActive == true && Grenade.GetComponent<Transform>().IsChildOf(Holder))
+        {
+            PrimaryGun.SetActive(false);
+            primaryActive = false;
+            grenadeActive = true;
+            Grenade.SetActive(true);
+        }
+
+    }
+}

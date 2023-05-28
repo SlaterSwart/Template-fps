@@ -73,6 +73,15 @@ public partial class @PlayerCon : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Grenade"",
+                    ""type"": ""Button"",
+                    ""id"": ""bdce415d-3454-4068-87ce-683a49c93fb4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Drop"",
                     ""type"": ""Button"",
                     ""id"": ""bf1934eb-9c7d-4c6c-8451-5a4194d72eef"",
@@ -112,6 +121,33 @@ public partial class @PlayerCon : IInputActionCollection2, IDisposable
                     ""name"": ""Reload"",
                     ""type"": ""Button"",
                     ""id"": ""e88b3814-51bf-4442-9b54-239a3d7112e2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""aaa686df-8353-47c5-82e5-8baeedde902d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Primary"",
+                    ""type"": ""Button"",
+                    ""id"": ""d3d14933-b37e-409f-81c7-65b526bb5276"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Throw"",
+                    ""type"": ""Button"",
+                    ""id"": ""b7a255f6-4ee1-4c7d-af1d-460dba205f3b"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -272,32 +308,48 @@ public partial class @PlayerCon : IInputActionCollection2, IDisposable
                     ""action"": ""Reload"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                }
-            ]
-        },
-        {
-            ""name"": ""water"",
-            ""id"": ""5efa8df1-dd98-4d33-9075-b2d79f0fdd9e"",
-            ""actions"": [
-                {
-                    ""name"": ""New action"",
-                    ""type"": ""Button"",
-                    ""id"": ""d191e60e-ac1b-4d75-af47-38499590cb4c"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
+                },
                 {
                     ""name"": """",
-                    ""id"": ""83ca61c7-4c0d-4093-8c7b-56182b2a4b01"",
-                    ""path"": """",
+                    ""id"": ""341a2563-4742-4000-bda8-302973d320be"",
+                    ""path"": ""<Keyboard>/f"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""New action"",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f09b9898-edb7-4ff6-bcf7-50deb9e855d4"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Primary"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6f00fb2e-7f3e-4710-aad7-eff4dfd95a38"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Grenade"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a416f07c-0f4e-4ea5-8f2d-4f0b31ece8c8"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Throw"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -313,14 +365,15 @@ public partial class @PlayerCon : IInputActionCollection2, IDisposable
         m_Land_Shoot = m_Land.FindAction("Shoot", throwIfNotFound: true);
         m_Land_Look = m_Land.FindAction("Look", throwIfNotFound: true);
         m_Land_Aim = m_Land.FindAction("Aim", throwIfNotFound: true);
+        m_Land_Grenade = m_Land.FindAction("Grenade", throwIfNotFound: true);
         m_Land_Drop = m_Land.FindAction("Drop", throwIfNotFound: true);
         m_Land_Pickup = m_Land.FindAction("Pickup", throwIfNotFound: true);
         m_Land_Sprint = m_Land.FindAction("Sprint", throwIfNotFound: true);
         m_Land_Firemode = m_Land.FindAction("Firemode", throwIfNotFound: true);
         m_Land_Reload = m_Land.FindAction("Reload", throwIfNotFound: true);
-        // water
-        m_water = asset.FindActionMap("water", throwIfNotFound: true);
-        m_water_Newaction = m_water.FindAction("New action", throwIfNotFound: true);
+        m_Land_Interact = m_Land.FindAction("Interact", throwIfNotFound: true);
+        m_Land_Primary = m_Land.FindAction("Primary", throwIfNotFound: true);
+        m_Land_Throw = m_Land.FindAction("Throw", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -385,11 +438,15 @@ public partial class @PlayerCon : IInputActionCollection2, IDisposable
     private readonly InputAction m_Land_Shoot;
     private readonly InputAction m_Land_Look;
     private readonly InputAction m_Land_Aim;
+    private readonly InputAction m_Land_Grenade;
     private readonly InputAction m_Land_Drop;
     private readonly InputAction m_Land_Pickup;
     private readonly InputAction m_Land_Sprint;
     private readonly InputAction m_Land_Firemode;
     private readonly InputAction m_Land_Reload;
+    private readonly InputAction m_Land_Interact;
+    private readonly InputAction m_Land_Primary;
+    private readonly InputAction m_Land_Throw;
     public struct LandActions
     {
         private @PlayerCon m_Wrapper;
@@ -399,11 +456,15 @@ public partial class @PlayerCon : IInputActionCollection2, IDisposable
         public InputAction @Shoot => m_Wrapper.m_Land_Shoot;
         public InputAction @Look => m_Wrapper.m_Land_Look;
         public InputAction @Aim => m_Wrapper.m_Land_Aim;
+        public InputAction @Grenade => m_Wrapper.m_Land_Grenade;
         public InputAction @Drop => m_Wrapper.m_Land_Drop;
         public InputAction @Pickup => m_Wrapper.m_Land_Pickup;
         public InputAction @Sprint => m_Wrapper.m_Land_Sprint;
         public InputAction @Firemode => m_Wrapper.m_Land_Firemode;
         public InputAction @Reload => m_Wrapper.m_Land_Reload;
+        public InputAction @Interact => m_Wrapper.m_Land_Interact;
+        public InputAction @Primary => m_Wrapper.m_Land_Primary;
+        public InputAction @Throw => m_Wrapper.m_Land_Throw;
         public InputActionMap Get() { return m_Wrapper.m_Land; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -428,6 +489,9 @@ public partial class @PlayerCon : IInputActionCollection2, IDisposable
                 @Aim.started -= m_Wrapper.m_LandActionsCallbackInterface.OnAim;
                 @Aim.performed -= m_Wrapper.m_LandActionsCallbackInterface.OnAim;
                 @Aim.canceled -= m_Wrapper.m_LandActionsCallbackInterface.OnAim;
+                @Grenade.started -= m_Wrapper.m_LandActionsCallbackInterface.OnGrenade;
+                @Grenade.performed -= m_Wrapper.m_LandActionsCallbackInterface.OnGrenade;
+                @Grenade.canceled -= m_Wrapper.m_LandActionsCallbackInterface.OnGrenade;
                 @Drop.started -= m_Wrapper.m_LandActionsCallbackInterface.OnDrop;
                 @Drop.performed -= m_Wrapper.m_LandActionsCallbackInterface.OnDrop;
                 @Drop.canceled -= m_Wrapper.m_LandActionsCallbackInterface.OnDrop;
@@ -443,6 +507,15 @@ public partial class @PlayerCon : IInputActionCollection2, IDisposable
                 @Reload.started -= m_Wrapper.m_LandActionsCallbackInterface.OnReload;
                 @Reload.performed -= m_Wrapper.m_LandActionsCallbackInterface.OnReload;
                 @Reload.canceled -= m_Wrapper.m_LandActionsCallbackInterface.OnReload;
+                @Interact.started -= m_Wrapper.m_LandActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_LandActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_LandActionsCallbackInterface.OnInteract;
+                @Primary.started -= m_Wrapper.m_LandActionsCallbackInterface.OnPrimary;
+                @Primary.performed -= m_Wrapper.m_LandActionsCallbackInterface.OnPrimary;
+                @Primary.canceled -= m_Wrapper.m_LandActionsCallbackInterface.OnPrimary;
+                @Throw.started -= m_Wrapper.m_LandActionsCallbackInterface.OnThrow;
+                @Throw.performed -= m_Wrapper.m_LandActionsCallbackInterface.OnThrow;
+                @Throw.canceled -= m_Wrapper.m_LandActionsCallbackInterface.OnThrow;
             }
             m_Wrapper.m_LandActionsCallbackInterface = instance;
             if (instance != null)
@@ -462,6 +535,9 @@ public partial class @PlayerCon : IInputActionCollection2, IDisposable
                 @Aim.started += instance.OnAim;
                 @Aim.performed += instance.OnAim;
                 @Aim.canceled += instance.OnAim;
+                @Grenade.started += instance.OnGrenade;
+                @Grenade.performed += instance.OnGrenade;
+                @Grenade.canceled += instance.OnGrenade;
                 @Drop.started += instance.OnDrop;
                 @Drop.performed += instance.OnDrop;
                 @Drop.canceled += instance.OnDrop;
@@ -477,43 +553,19 @@ public partial class @PlayerCon : IInputActionCollection2, IDisposable
                 @Reload.started += instance.OnReload;
                 @Reload.performed += instance.OnReload;
                 @Reload.canceled += instance.OnReload;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
+                @Primary.started += instance.OnPrimary;
+                @Primary.performed += instance.OnPrimary;
+                @Primary.canceled += instance.OnPrimary;
+                @Throw.started += instance.OnThrow;
+                @Throw.performed += instance.OnThrow;
+                @Throw.canceled += instance.OnThrow;
             }
         }
     }
     public LandActions @Land => new LandActions(this);
-
-    // water
-    private readonly InputActionMap m_water;
-    private IWaterActions m_WaterActionsCallbackInterface;
-    private readonly InputAction m_water_Newaction;
-    public struct WaterActions
-    {
-        private @PlayerCon m_Wrapper;
-        public WaterActions(@PlayerCon wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Newaction => m_Wrapper.m_water_Newaction;
-        public InputActionMap Get() { return m_Wrapper.m_water; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(WaterActions set) { return set.Get(); }
-        public void SetCallbacks(IWaterActions instance)
-        {
-            if (m_Wrapper.m_WaterActionsCallbackInterface != null)
-            {
-                @Newaction.started -= m_Wrapper.m_WaterActionsCallbackInterface.OnNewaction;
-                @Newaction.performed -= m_Wrapper.m_WaterActionsCallbackInterface.OnNewaction;
-                @Newaction.canceled -= m_Wrapper.m_WaterActionsCallbackInterface.OnNewaction;
-            }
-            m_Wrapper.m_WaterActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @Newaction.started += instance.OnNewaction;
-                @Newaction.performed += instance.OnNewaction;
-                @Newaction.canceled += instance.OnNewaction;
-            }
-        }
-    }
-    public WaterActions @water => new WaterActions(this);
     public interface ILandActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -521,14 +573,14 @@ public partial class @PlayerCon : IInputActionCollection2, IDisposable
         void OnShoot(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
+        void OnGrenade(InputAction.CallbackContext context);
         void OnDrop(InputAction.CallbackContext context);
         void OnPickup(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
         void OnFiremode(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
-    }
-    public interface IWaterActions
-    {
-        void OnNewaction(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
+        void OnPrimary(InputAction.CallbackContext context);
+        void OnThrow(InputAction.CallbackContext context);
     }
 }
