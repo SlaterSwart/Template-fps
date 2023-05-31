@@ -5,8 +5,8 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(CharacterController), typeof(PlayerInput))]
 public class PlayerController : MonoBehaviour
 {
-    private float playerSpeed = 2.0f;
-
+    public float playerSpeed = 2.0f;
+    public float sprintSpeed;
     private float jumpHeight = 1.0f;
 
     private float gravityValue = -9.81f;
@@ -31,6 +31,8 @@ public class PlayerController : MonoBehaviour
     private Transform zoomPos;
     public GameObject Holder;
 
+    private float OGSpeed;
+
     Vector2 mouseInput;
     private void Awake()
     {
@@ -42,7 +44,7 @@ public class PlayerController : MonoBehaviour
         aimAction = playerInput.actions["Aim"];
         sprintAction = playerInput.actions["Sprint"];
         Camera = GameObject.Find("Main Camera");
-
+        OGSpeed = playerSpeed;
         //restPos.position = new Vector3(0.626f, -1.5f, 0.5f);//Holder.transform.localPosition;
         //zoomPos.position = new Vector3(0.342999995f, -1.38900006f, 0.497999996f);
 
@@ -68,8 +70,8 @@ public class PlayerController : MonoBehaviour
     {
         Camera.GetComponent<Camera>().fieldOfView = camera_FOV;
 
-        if (sprintAction.IsPressed()) playerSpeed = 4.0f; //Sprint
-        else playerSpeed = 2.0f;
+        if (sprintAction.IsPressed()) playerSpeed = sprintSpeed; //Sprint
+        else playerSpeed = OGSpeed;
 
         if (aimAction.IsPressed()) //aim
         {
