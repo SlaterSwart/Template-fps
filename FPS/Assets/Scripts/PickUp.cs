@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 [RequireComponent(typeof(CharacterController), typeof(PlayerInput))]
 public class PickUp : MonoBehaviour
 {
     private PlayerCon controls;
+
+    public TMP_Text ActionText;
 
     private bool FPress;
     private bool Gpress;
@@ -41,26 +44,36 @@ public class PickUp : MonoBehaviour
             slotFull = true;
         }
     }
+
+    IEnumerator DisplayTextUp(){
+            ActionText.text = "Equipped " + gameObject.name;
+            yield return new WaitForSeconds(1.0f);
+            ActionText.text = " ";//clear
+    }
+
+    IEnumerator DisplayTextDown(){
+            ActionText.text = "Dropped " + gameObject.name;
+            yield return new WaitForSeconds(1.0f);
+            ActionText.text = " ";//clear
+    }
     private void Update() { 
+
         Vector3 distanceToPlayer = player.position - transform.position;
         if (!equipped && distanceToPlayer.magnitude <= pickUpRange && pickingUpAction.triggered && !slotFull) {
             PickingUp();
             Debug.Log("Pickup");
+            StartCoroutine(DisplayTextUp());
+
         }
-
-
-        if (equipped /*&& dropAction.triggered*/)
+        if (equipped)
         {
             if (dropAction.triggered)
             {
+            StartCoroutine(DisplayTextDown());
             Drop();
-
-            Debug.Log("Drop");
-            }
-          
+         }   
         }
-    }
-    private void PickingUp(){
+    void PickingUp(){
         equipped = true;
         slotFull = true;
 
@@ -77,7 +90,7 @@ public class PickUp : MonoBehaviour
         gunScript.GetComponent<Gun>().enabled = true;
 
     }
-    private void Drop(){
+    void Drop(){
         equipped = false;
         slotFull = false;
 
@@ -101,4 +114,5 @@ public class PickUp : MonoBehaviour
         //disable gun script
         gunScript.GetComponent<Gun>().enabled = false;
     }
+}
 }

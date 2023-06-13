@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 [RequireComponent(typeof(CharacterController), typeof(PlayerInput))]
 public class Grenade : MonoBehaviour
@@ -19,6 +20,8 @@ public class Grenade : MonoBehaviour
     public SphereCollider BoxC;
     public bool IsThrown;
     public float blastRad;
+
+
 
 
     private void Awake()

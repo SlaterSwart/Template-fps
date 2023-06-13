@@ -6610,6 +6610,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dd33e3cc2f39aa46a028812872de762, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ActionText: {fileID: 1825747088}
   gunScript: {fileID: 933212366}
   rb: {fileID: 933212375}
   BC: {fileID: 933212368}
@@ -7280,7 +7281,7 @@ GameObject:
   - component: {fileID: 1825747089}
   - component: {fileID: 1825747088}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Item Action Display
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7389,7 +7390,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: -42.11136, y: 0, z: -59.618164, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
