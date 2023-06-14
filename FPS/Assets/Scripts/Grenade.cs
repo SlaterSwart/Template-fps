@@ -19,9 +19,12 @@ public class Grenade : MonoBehaviour
     public Rigidbody RB;
     public SphereCollider BoxC;
     public bool IsThrown;
-    public float blastRad;
 
 
+    public GameObject explosionEffect;
+
+    public float explosionForce = 10f;
+    public float blastRad = 30f;
 
 
     private void Awake()
@@ -48,6 +51,7 @@ public class Grenade : MonoBehaviour
             //Debug.Log(fuseTime);
         }
         else{
+            Explode();
         }
     }
 
@@ -58,5 +62,21 @@ public class Grenade : MonoBehaviour
         
             
         //Destroy(gameObject);
+    }
+
+    private void Explode(){
+        Collider[] colliders = Physics.OverlapSphere(transform.position, blastRad);
+
+        foreach(Collider near in colliders){
+            Rigidbody rig = near.GetComponent<Rigidbody>();
+
+            if(rig != null){
+                rig.AddExplosionForce(explosionForce, transform.position, blastRad, 1f, ForceMode.Impulse)
+            }
+
+        }
+
+        Instantiate(explosionEffect, transform.position, transform.rotation)
+        Destroy(gameObject);
     }
 }
