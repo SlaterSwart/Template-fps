@@ -71,12 +71,12 @@ public class Grenade : MonoBehaviour
             Rigidbody rig = near.GetComponent<Rigidbody>();
 
             if(rig != null){
-                rig.AddExplosionForce(explosionForce, transform.position, blastRad, 1f, ForceMode.Impulse)
+                rig.AddExplosionForce(explosionForce, transform.position, blastRad, 1f, ForceMode.Impulse);
             }
 
         }
 
-        Instantiate(explosionEffect, transform.position, transform.rotation)
+        Instantiate(explosionEffect, transform.position, transform.rotation);
         Destroy(gameObject);
     }
 }

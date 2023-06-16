@@ -6655,6 +6655,8 @@ MonoBehaviour:
   RB: {fileID: 1031343214}
   BoxC: {fileID: 1031343215}
   IsThrown: 0
+  explosionEffect: {fileID: 0}
+  explosionForce: 10
   blastRad: 0
 --- !u!114 &1031343219
 MonoBehaviour:
