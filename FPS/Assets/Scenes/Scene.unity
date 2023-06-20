@@ -937,7 +937,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &531676625
 Transform:
   m_ObjectHideFlags: 0
@@ -1042,7 +1042,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -6243,8 +6243,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4287861658
+  m_fontColor: {r: 0.6037736, g: 0.5781417, b: 0.5781417, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -6648,16 +6648,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe9cbe6da3fcc4aa3a45262fc402dd17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  throwSpeed: 5
-  fuseTime: 5
+  throwSpeed: 8
+  fuseTime: 3
   grenade: {fileID: 58484400}
   GrenadeSpeed: 10
   RB: {fileID: 1031343214}
   BoxC: {fileID: 1031343215}
   IsThrown: 0
-  explosionEffect: {fileID: 0}
-  explosionForce: 10
-  blastRad: 0
+  explosionEffect: {fileID: 3500745475602199195, guid: 70b0f8c3f0d8244e986872a311787129, type: 3}
+  explosionForce: 15
+  blastRad: 3
 --- !u!114 &1031343219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6873,7 +6873,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0.6039216, g: 0.5764706, b: 0.5764706, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -7338,8 +7338,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4287861658
+  m_fontColor: {r: 0.6039216, g: 0.5764706, b: 0.5764706, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

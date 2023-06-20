@@ -18,7 +18,7 @@ public class Grenade : MonoBehaviour
     public int GrenadeSpeed;
     public Rigidbody RB;
     public SphereCollider BoxC;
-    public bool IsThrown;
+    public bool IsThrown = false;
 
 
     public GameObject explosionEffect;
@@ -35,7 +35,6 @@ public class Grenade : MonoBehaviour
     }
     private void Update()
     {
-        RaycastHit hit;
 
         if (Throw.triggered && IsThrown == false)
         {
@@ -48,9 +47,10 @@ public class Grenade : MonoBehaviour
 
         if (fuseTime > 0 && IsThrown == true){
             fuseTime -= Time.deltaTime;
+            Debug.Log(fuseTime);
             //Debug.Log(fuseTime);
         }
-        else{
+        if(fuseTime <= 0) {
             Explode();
         }
     }
